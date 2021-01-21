@@ -47,10 +47,9 @@ router.post('/', async (req, res) => {
 
 
 // Delete a specific log
-// TODO: change remove to deleteOne
 router.delete('/:logId', async (req, res) => {
     try {
-        const removedLog = await Log.remove({_id: req.params.logId});
+        const removedLog = await Log.deleteOne({_id: req.params.logId});
         res.json(removedLog)
     } catch (err) {
         res.json({message: err})
