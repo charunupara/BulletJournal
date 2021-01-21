@@ -1,6 +1,7 @@
 const express = require('express'); 
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 require('dotenv/config'); // access .env
 
 const logRoute = require('./routes/log')
@@ -10,6 +11,9 @@ const app = express();
 
 // Middleware for parsing HTTP requests
 app.use(bodyParser.json());
+
+// Allow fetching
+app.use(cors())
 
 // Middleware for API routes
 app.use('/', logRoute)
