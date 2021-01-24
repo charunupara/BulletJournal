@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv/config'); // access .env
 
-const logRoute = require('./routes/log')
+const logRoute = require('./routes/log');
+const taskRoute = require('./routes/task');
+const noteRoute = require('./routes/note');
+const eventRoute = require('./routes/event');
 
 // Instantiate server
 const app = express();
@@ -13,10 +16,13 @@ const app = express();
 app.use(bodyParser.json());
 
 // Allow fetching
-app.use(cors())
+app.use(cors());
 
 // Middleware for API routes
-app.use('/', logRoute)
+app.use('/logs', logRoute);
+app.use('/tasks', taskRoute);
+app.use('/notes', noteRoute);
+app.use('/events', eventRoute);
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useUnifiedTopology: true, useNewUrlParser: true }, () => {

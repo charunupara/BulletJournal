@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// TODO: change default date to be in user's local time zone
+
 const LogSchema = mongoose.Schema({
     title: {
         type: String,
@@ -12,7 +14,7 @@ const LogSchema = mongoose.Schema({
     status: String, // default, crossed out, migrated, done
     date: {
         type: Date,
-        default: Date.now // TODO: local time zone
+        default: Date.now // This is currently UTC time when I'm using Postman
     }
 })
 
