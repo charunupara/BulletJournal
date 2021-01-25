@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Log = require('../models/Log');
-const Task = require('../models/Task');
+
 
 // TODO: look up how to handle status code for different errors types
 // TODO: handle PATCH requests
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
     const newLog = new Log({
         title: req.body.title,
         category: req.body.category,
-        status: req.body.status,
+        isRelevant: req.body.isRelevant,
         date: req.body.date
     });
 
@@ -52,7 +52,7 @@ router.put('/:logId', async (req, res) => {
         const updatedLog = await Log.updateOne(req.params._id, {
             title: req.body.title,
             category: req.body.category,
-            status: req.body.status,
+            isRelevant: req.body.isRelevant,
             date: req.body.date
         });
         res.status(200).json(updatedLog);
