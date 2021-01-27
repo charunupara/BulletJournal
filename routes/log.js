@@ -61,6 +61,15 @@ router.put('/:logId', async (req, res) => {
     }
 })
 
+router.patch('/:logId', async (req, res) => {
+    try {
+        const updatedLog = await Log.updateOne({ _id: req.params.logId}, { $set:{isRelevant: req.body.isRelevant}});
+        res.json(updatedLog);
+    } catch (err) {
+        res.status(404).json({message: err})
+    }
+})
+
 // Delete a specific log
 router.delete('/:logId', async (req, res) => {
     try {
