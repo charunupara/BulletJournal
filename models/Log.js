@@ -6,16 +6,22 @@ const LogSchema = mongoose.Schema({
 
     title: {
        type: String,
-       required: true
+       required: true,
+       default: null
     },
     category: {
         type: String,
-        required: true
+        required: true,
+        default: null
     },
     isRelevant:{
         type: Boolean,
         default: true
     }, 
+    isComplete: {
+        type: Boolean,
+        default: null
+    },
     date: {
         type: Date,
         default: Date.now
