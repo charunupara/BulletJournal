@@ -22,7 +22,8 @@ const UserSchema = mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  logs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Logs"}]
 });
 
 module.exports = mongoose.model('User', UserSchema);

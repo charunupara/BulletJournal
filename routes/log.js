@@ -7,7 +7,7 @@ const verify = require('./verifyToken');
 // TODO: look up how to handle status code for different errors types
 
 // Get all logs
-router.get('/', async (req, res) => {
+router.get('/', verify, async (req, res) => {
     try {
         const logs = await Log.find();
         res.status(200).json(logs);
@@ -83,15 +83,17 @@ router.get('/:logId/date', async (req, res) => {
 });
 
 // Create new log
-router.post('/', async (req, res) => {
+router.post('/', verify, async (req, res) => {
     
     const newLog = new Log({
         title: req.body.title,
         category: req.body.category,
         isRelevant: req.body.isRelevant,
         isComplete: req.body.category === "task" ? false : null,
-        date: req.body.date
+        date: req.body.date,
+        author: req.user._id
     });
+
 
     try {
         const savedLog = await newLog.save();
