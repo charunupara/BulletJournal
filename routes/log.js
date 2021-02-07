@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Log = require('../models/Log');
+const verify = require('./verifyToken');
 
 
 // TODO: look up how to handle status code for different errors types
