@@ -9,7 +9,7 @@ const verify = require('./verifyToken');
 // Get all logs
 router.get('/', verify, async (req, res) => {
     try {
-        const logs = await Log.find();
+        const logs = await Log.find({author: req.user._id});
         res.status(200).json(logs);
     } catch (err) {
         res.status(404).json({message: err})
