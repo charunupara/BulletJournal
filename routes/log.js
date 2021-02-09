@@ -9,7 +9,7 @@ const verify = require('./verifyToken');
 // Get all logs
 router.get('/', verify, async (req, res) => {
     try {
-        const logs = await Log.find({author: req.user._id});
+        const logs = await Log.find({author: req.user._id}); // will only get logs from logged-in user
         res.status(200).json(logs);
     } catch (err) {
         res.status(404).json({message: err})
@@ -18,6 +18,7 @@ router.get('/', verify, async (req, res) => {
 
 
 // Get a specific log
+// TODO: verify user before granting access
 router.get('/:logId', async (req, res) => {
     try {
         const log = await Log.findById(req.params.logId);
