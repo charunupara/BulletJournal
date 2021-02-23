@@ -22,9 +22,16 @@ app.use('/logs', logRoute);
 app.use('/users', authRoute);
 
 // Connect to DB
-mongoose.connect(process.env.DB_CONNECTION, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
-    console.log("connected to database"); 
-});
+// Using a try-catch to handle the exceptional case where connection to DB might not work properly
+try {
+    mongoose.connect(process.env.DB_CONNECTION, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
+        console.log("connected to database"); 
+    });
+} catch (error) {
+    throw new Error(error.message); // DB is vital, so if we can't connect, we should halt the program
+}
+
+
 
 // Listen on specified port
 const port = 8000;
